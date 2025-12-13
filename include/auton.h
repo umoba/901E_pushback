@@ -3,20 +3,23 @@
 namespace Robot {
 
 /**
- * @brief The Intake class represents a robot intake system.
+ * @brief The Auton class handles autonomous routine selection and execution.
  */
 class Auton {
 public:
    /**
-    * @brief Runs the main function of the ring rush system.
-    *
-    * Takes optional user input to control the direction of the intake system in
-    * autonomous.
+    * @brief Array of auton route descriptions for LCD display
+    * Change as needed to match auton routes implemented in auton.cpp
     */
-   void run();
-   void right7blocks();
+  const char* routeSpecifics[12];
+  int autonRoute;
+  void autonSelection();
+  void selectedAuton(int route);
+  void runSelectedAuton(int route);
 
-   Auton();
+  void right7blocks();
+
+  Auton();
 
 };
 } // namespace Robot

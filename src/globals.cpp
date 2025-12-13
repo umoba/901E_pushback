@@ -10,6 +10,9 @@ namespace Robot {
     // Subsystems
     RobotSubsystems subsystem;
 
+    // Autonsystem
+    AutonSystem autonSystem;
+
     // IMU
     pros::Imu imu(13);
     // Controller

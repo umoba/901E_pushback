@@ -25,6 +25,11 @@ namespace Robot {
     };
     extern RobotSubsystems subsystem;
 
+    struct AutonSystem {
+      Robot::Auton auton;
+    };
+    extern AutonSystem autonSystem;
+
     // IMU
     struct alteredIMU {
       Robot::FilteredIMU imus;

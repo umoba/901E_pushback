@@ -10,12 +10,6 @@ using namespace Robot::Globals;
 #include "lemlib/api.hpp" // IWYU pragma: keep
 ASSET(ringTest_txt); // '.' replaced with "_" to make c++ happy
 
-// Auton Selection Logic
-int autonRoute = 1;
-void selectedAuton(int route) {
-  autonRoute = route;
-}
-
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -27,6 +21,7 @@ void selectedAuton(int route) {
 void initialize() {
   pros::lcd::initialize();
   chassis.calibrate();
+  autonSystem.auton.autonSelection();
   pros::Task screenTask([&]() {
   while (true) {
     
@@ -34,7 +29,8 @@ void initialize() {
     }
     // print robot location to the brain screen
     pros::lcd::print(0, "X: %f", chassis.getPose().x, "| Y: %f", chassis.getPose().y, "| Theta: %f", chassis.getPose().theta); // x, y, theta
-    pros::lcd::print(2, "Auton Selector Value: %f", autonSelector.get_position());
+    // lines 1-3 reserved for auton selection
+
 
 
     // log position telemetry
@@ -61,12 +57,7 @@ void competition_initialize() {
 
 
 void autonomous() {
-  // auton(autonRoute);
-  
-
-
-
-
+  autonSystem.auton.runSelectedAuton(autonSystem.auton.autonRoute);
 }
 
 /**
