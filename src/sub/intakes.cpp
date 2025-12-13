@@ -1,4 +1,3 @@
-// #include "main.h"
 #include "subs_headers/intakes.h"
 
 #include "globals.h"// IWYU pragma: keep
@@ -8,31 +7,35 @@ using namespace Robot;
 using namespace Robot::Globals;
 
 
-
-
-
 Intake::Intake() : auton(true), l2(false), up(false), stopped(false), state(0) {}
 bool red = false;
 static bool elevate;
 int state = -1;
 void Intake::intake(int state) {
   // OVERALL INTAKE FUNCTIONS
-  // high goal
+  // stop
   if (state == 0) {
+    topIntake.move_velocity(0);
+    sprocketIntake.move_velocity(0);
+    flexIntake.move_velocity(0);
   }
-  // upper goal
+  // long goal
   else if (state == 1) {
   }
-  // low goal
+  // upper goal
   else if (state == 2) {
   }
-  // storage
+  // low goal
   else if (state == 3) {
   }
-  // stop
+  // skills upper
   else if (state == 4) {
   }
-  // COLOR SENSOR FUNCTIONS
+  // skills low
+  else if (state == 5) {
+
+  }
+
   else if (state == 8) {
 
   }

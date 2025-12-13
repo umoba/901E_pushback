@@ -17,7 +17,6 @@ public:
   void selectedAuton(int route);
   void runSelectedAuton(int route);
 
-  void right7blocks();
 
   Auton();
 

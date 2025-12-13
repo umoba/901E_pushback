@@ -10,7 +10,8 @@
 #include "pros/distance.hpp"
 #include "subs_headers/intakes.h"
 #include "subs_headers/tongue.h"
-#include "auton.h"
+#include "autonomous_headers/auton.h"
+#include "autonomous_headers/autonomousRoutes.h"
 
 
 
@@ -21,12 +22,12 @@ namespace Robot {
     struct RobotSubsystems {
       Robot::Intake intake;
       Robot::Tongue tongue;
-      // Robot::Auton auton;
     };
     extern RobotSubsystems subsystem;
 
     struct AutonSystem {
       Robot::Auton auton;
+      Robot::AutonomousRoutes autonomousRoutes;
     };
     extern AutonSystem autonSystem;
 

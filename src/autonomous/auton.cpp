@@ -1,5 +1,5 @@
 // #include "main.h"
-#include "auton.h"
+#include "autonomous_headers/auton.h"
 
 #include "globals.h"// IWYU pragma: keep
 #include "pros/misc.h"
@@ -63,7 +63,7 @@ void Auton::runSelectedAuton(int route) {
       break;
     case 3:
       // Right 7 Block
-      right7blocks();
+      autonSystem.autonomousRoutes.right7blocks();
       break;
     case 4:
       // Left 7 Block
