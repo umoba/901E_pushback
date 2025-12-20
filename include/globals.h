@@ -59,8 +59,9 @@ namespace Robot {
     extern pros::Optical coloring;
 
     // Distance
-    extern pros::Distance distance;
-    extern pros::Distance distance2;
+    extern pros::Distance back;
+    extern pros::Distance leftD;
+    extern pros::Distance rightD;
 
     // Pneumatics
     extern pros::adi::Pneumatics  tonguemech;

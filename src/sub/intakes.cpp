@@ -7,33 +7,48 @@ using namespace Robot;
 using namespace Robot::Globals;
 
 
-Intake::Intake() : auton(true), l2(false), up(false), stopped(false), state(0) {}
-bool red = false;
-static bool elevate;
+
+
+Intake::Intake() : state(0) {}
+
 int state = -1;
 void Intake::intake(int state) {
   // OVERALL INTAKE FUNCTIONS
   // stop
   if (state == 0) {
-    topIntake.move_velocity(0);
-    sprocketIntake.move_velocity(0);
-    flexIntake.move_velocity(0);
+    topIntake.move_velocity(STOPPED_VELOCITY);
+    sprocketIntake.move_velocity(STOPPED_VELOCITY);
+    flexIntake.move_velocity(STOPPED_VELOCITY);
   }
   // long goal
   else if (state == 1) {
+    topIntake.move_velocity(MAX_55_VELOCITY);
+    sprocketIntake.move_velocity(MAX_11_VELOCITY);
+    flexIntake.move_velocity(HALFED_55_VELOCITY);
   }
   // upper goal
   else if (state == 2) {
+    topIntake.move_velocity(-MAX_55_VELOCITY);
+    sprocketIntake.move_velocity(MAX_11_VELOCITY);
+    flexIntake.move_velocity(HALFED_55_VELOCITY);
   }
   // low goal
   else if (state == 3) {
+    topIntake.move_velocity(-MAX_55_VELOCITY);
+    sprocketIntake.move_velocity(-MAX_11_VELOCITY);
+    flexIntake.move_velocity(-HALFED_55_VELOCITY);
   }
   // skills upper
   else if (state == 4) {
+    topIntake.move_velocity(-HALFED_55_VELOCITY);
+    sprocketIntake.move_velocity(-MAX_11_VELOCITY);
+    flexIntake.move_velocity(-HALFED_55_VELOCITY);
   }
   // skills low
   else if (state == 5) {
-
+    topIntake.move_velocity(-HALFED_55_VELOCITY);
+    sprocketIntake.move_velocity(-MAX_11_VELOCITY);
+    flexIntake.move_velocity(-HALFED_55_VELOCITY);
   }
 
   else if (state == 8) {
@@ -169,3 +184,12 @@ void Intake::park() {
       // doublePark.toggle();
   }
 }
+
+// int flexIntakeVelocityDeterminer() {
+//   if (tonguemech.extended()) {
+//     return MAX_55_VELOCITY;
+//   }
+//   else {
+//     return HALFED_55_VELOCITY;
+//   }
+// }

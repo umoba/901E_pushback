@@ -13,22 +13,21 @@ public:
     * Takes optional user input to control the direction of the intake system in
     * autonomous.
     */
-   bool red;
-   bool auton;
-   void intake(int state);
-   void run();
-   void runrev();
-   void toggleStopper();
-   void color_sort();
-   void park();
-   Intake();
+  const int MAX_55_VELOCITY=200;
+  const int MAX_11_VELOCITY=600;
+  const int HALFED_55_VELOCITY=100;
+  const int STOPPED_VELOCITY=0;
+  void intake(int state);
+  void run();
+  void runrev();
+  void toggleStopper();
+  void color_sort();
+  void park();
+  Intake();
 
 private:
    // bool elevate;
-   bool l2;
-   bool up;
-   bool dn;
-   bool stopped; //stopping the intake to load
+  int flexIntakeVelocityDeterminer();
    int state;
    /**
     * @brief blue is false, red is true.

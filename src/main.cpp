@@ -21,25 +21,24 @@ ASSET(ringTest_txt); // '.' replaced with "_" to make c++ happy
 void initialize() {
   pros::lcd::initialize();
   chassis.calibrate();
-  autonSystem.auton.autonSelection();
   pros::Task screenTask([&]() {
-  while (true) {
-    
+    while (true) {
+      
+      autonSystem.auton.autonSelection();
+        
+      // print robot location to the brain screen
+      pros::lcd::print(0, "X: %f", chassis.getPose().x, "| Y: %f", chassis.getPose().y, "| Theta: %f", chassis.getPose().theta); // x, y, theta
+      // lines 1-3 reserved for auton selection
 
+
+
+      // log position telemetry
+      lemlib::telemetrySink()->info("Chassis pose: {}", chassis.getPose());
+      // delay to save resources
+      pros::delay(50);
+      
     }
-    // print robot location to the brain screen
-    pros::lcd::print(0, "X: %f", chassis.getPose().x, "| Y: %f", chassis.getPose().y, "| Theta: %f", chassis.getPose().theta); // x, y, theta
-    // lines 1-3 reserved for auton selection
-
-
-
-    // log position telemetry
-    lemlib::telemetrySink()->info("Chassis pose: {}", chassis.getPose());
-    // delay to save resources
-    pros::delay(50);
-  
-    });
-     
+  });
 
 }   
 

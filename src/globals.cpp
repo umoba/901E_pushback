@@ -33,9 +33,9 @@ namespace Robot {
     pros::Optical coloring(21);
 
     // // Distance
-    // pros::Distance back(5);
-    // pros::Distance left(16);
-    // pros::Distance right(17);
+    pros::Distance back(5);
+    pros::Distance leftD(16);
+    pros::Distance rightD(17);
 
     // Pneumatics
     pros::adi::Pneumatics  tonguemech('A', false);
