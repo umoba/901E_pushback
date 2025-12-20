@@ -9,49 +9,59 @@ using namespace Robot::Globals;
 
 
 
-Intake::Intake() : state(0) {}
+Intake::Intake() : state(0), storage(false) {}
 
 int state = -1;
 void Intake::intake(int state) {
   // OVERALL INTAKE FUNCTIONS
   // stop
   if (state == 0) {
+    storage = false;
     topIntake.move_velocity(STOPPED_VELOCITY);
     sprocketIntake.move_velocity(STOPPED_VELOCITY);
     flexIntake.move_velocity(STOPPED_VELOCITY);
   }
   // long goal
   else if (state == 1) {
+    storage = false;
     topIntake.move_velocity(MAX_55_VELOCITY);
     sprocketIntake.move_velocity(MAX_11_VELOCITY);
     flexIntake.move_velocity(HALFED_55_VELOCITY);
   }
   // upper goal
   else if (state == 2) {
+    storage = false;
     topIntake.move_velocity(-MAX_55_VELOCITY);
     sprocketIntake.move_velocity(MAX_11_VELOCITY);
     flexIntake.move_velocity(HALFED_55_VELOCITY);
   }
   // low goal
   else if (state == 3) {
+    storage = false;
     topIntake.move_velocity(-MAX_55_VELOCITY);
     sprocketIntake.move_velocity(-MAX_11_VELOCITY);
     flexIntake.move_velocity(-HALFED_55_VELOCITY);
   }
   // skills upper
   else if (state == 4) {
+    storage = false;
     topIntake.move_velocity(-HALFED_55_VELOCITY);
     sprocketIntake.move_velocity(-MAX_11_VELOCITY);
     flexIntake.move_velocity(-HALFED_55_VELOCITY);
   }
   // skills low
   else if (state == 5) {
+    storage = false;
     topIntake.move_velocity(-HALFED_55_VELOCITY);
     sprocketIntake.move_velocity(-MAX_11_VELOCITY);
     flexIntake.move_velocity(-HALFED_55_VELOCITY);
   }
   // 
   else if (state == 6) {
+    storage = true;
+    topIntake.move_velocity(MAX_55_VELOCITY);
+    sprocketIntake.move_velocity(MAX_11_VELOCITY);
+    flexIntake.move_velocity(HALFED_55_VELOCITY);
 
   }
 
@@ -123,8 +133,8 @@ if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
       }
       else {
         topIntake.move(-127); // run intake when piston is toggled
-      sprocketIntake.move(127); // run intake when piston is toggled
-      flexIntake.move(127);
+        sprocketIntake.move(127); // run intake when piston is toggled
+        flexIntake.move(127);
       }
       }
     }
@@ -224,7 +234,7 @@ void Intake::park() {
   }
 }
 
-// int flexIntakeVelocityDeterminer() {
+// int Intake::flexIntakeVelocityDeterminer() {
 //   if (tonguemech.extended()) {
 //     return MAX_55_VELOCITY;
 //   }

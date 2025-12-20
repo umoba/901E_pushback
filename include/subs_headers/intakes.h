@@ -24,6 +24,7 @@ public:
   void color_sort();
   void park();
   int getState();
+  bool storage;
   Intake();
 
 private:
