@@ -23,6 +23,7 @@ public:
   void toggleStopper();
   void color_sort();
   void park();
+  int getState();
   Intake();
 
 private:

@@ -8,3 +8,5 @@ Created config.cpp and config.hpp that allows software information, such as cons
 
 Updated the intake file based on Config.prematches.skillsMode, where the bool determines whether the mode is skills, and then decreases the outtake of the upper goal based on the bool value.
 
+12.20
+Created a getState() function for the Intake class for better logic creation using the intake(int state) function with autonomated state control outside.

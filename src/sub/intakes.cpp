@@ -74,8 +74,33 @@ void Intake::intake(int state) {
  }
 
 
-void intakeState(int a) {
-  
+int Intake::getState() {
+  int state;
+  if (sprocketIntake.get_target_velocity() == MAX_11_VELOCITY) {
+    if (topIntake.get_target_velocity() == -MAX_55_VELOCITY) {
+      state = 2;
+    }
+    else if (topIntake.get_target_velocity() == -HALFED_55_VELOCITY) {
+      state = 5;
+    }
+    else {
+      state = 1;
+    }
+  }
+  else if (sprocketIntake.get_target_velocity() == 0) {
+    state = 0;
+  }
+  else {
+    state = 4;
+  }
+
+
+
+
+
+
+
+  return state;
 }
 
 // Run the intake
@@ -181,23 +206,17 @@ void Intake::toggleStopper() {
 }
 
 // // Color sorting
-// void Intake::color_sort() {
-//   if (auton) {
-//      coloring.set_led_pwm(50);
-//     if (coloring.get_hue() >= 25.0 && coloring.get_hue() <= 30.0 && !red) {
-        
-//       intake(8);
-//       pros::delay(500);
-//       intake(6);
-//     } 
-//     else if (coloring.get_hue() >= 180.0 && coloring.get_hue() <= 240.0 && red) {
-//         intake(8);
-//     }
+void Intake::color_sort() {
+  if (Config::prematches.inAuton && Intake::getState() == 1) {
+     coloring.set_led_pwm(50);
+    if ((coloring.get_hue() >= 25.0 && coloring.get_hue() <= 30.0 && !Config::prematches.allianceIsRed) || (coloring.get_hue() >= 180.0 && coloring.get_hue() <= 240.0 && Config::prematches.allianceIsRed)){
+      Intake::intake(2);
+      pros::delay(500);
+      Intake::intake(1);
+    } 
+  }
+}
 
-//   }
-   
-
-// }
 // Double parking 
 void Intake::park() {
   if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
