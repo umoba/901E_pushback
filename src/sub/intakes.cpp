@@ -1,5 +1,5 @@
 #include "subs_headers/intakes.h"
-
+#include "config.hpp"
 #include "globals.h"// IWYU pragma: keep
 #include "pros/misc.h"
 
@@ -50,6 +50,14 @@ void Intake::intake(int state) {
     sprocketIntake.move_velocity(-MAX_11_VELOCITY);
     flexIntake.move_velocity(-HALFED_55_VELOCITY);
   }
+  // 
+  else if (state == 6) {
+
+  }
+
+  else if (state == 7) {
+
+  }
 
   else if (state == 8) {
 
@@ -83,9 +91,16 @@ if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
         flexIntake.move(0); 
       }
       else{
-      topIntake.move(-127); // run intake when piston is toggled
+      Intake::intake(3);
+      pros::delay(300);
+      if (Config::prematches.skillsMode) {
+        Intake::intake(4);
+      }
+      else {
+        topIntake.move(-127); // run intake when piston is toggled
       sprocketIntake.move(127); // run intake when piston is toggled
       flexIntake.move(127);
+      }
       }
     }
 
@@ -116,9 +131,14 @@ if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
         topIntake.move(0);
       }
       else{
-      topIntake.move(-127); // run intake when piston is toggled
-      sprocketIntake.move(-127);  
-      flexIntake.move(-127);
+        if (Config::prematches.skillsMode) {
+          Intake::intake(5);
+        }
+        else {
+          topIntake.move(-127); // run intake when piston is toggled
+          sprocketIntake.move(-127); // run intake when piston is toggled
+          flexIntake.move(-127);
+        }
       }
   }
 
