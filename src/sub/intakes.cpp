@@ -104,7 +104,11 @@ int Intake::getState() {
     state = 4;
   }
 
-
+void Intake::stopTOP() {
+  if (storage == true && ((coloring.get_hue() >= 25.0 && coloring.get_hue() <= 30.0) || (coloring.get_hue() >= 180.0 && coloring.get_hue() <= 240.0))) {
+    topIntake.move_velocity(STOPPED_VELOCITY);
+  }
+}
 
 
 

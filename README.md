@@ -12,9 +12,12 @@ Updated the intake file based on Config.prematches.skillsMode, where the bool de
 Created a getState() function for the Intake class for better logic creation using the intake(int state) function with autonomated state control outside.
 
 12.20
-
 Created a storage boolean value for easier logic creation 
 
 12.26
 Added/edited comments for some functions
 Changed rotational sensor values since it wasn't compatible with centidegrees.
+
+12.27
+Created a function that stops the top intake when the color sensor detects a block
+Create some more config and preset values for future application of distance sensors

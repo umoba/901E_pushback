@@ -18,6 +18,7 @@ public:
   const int HALFED_55_VELOCITY=100;
   const int STOPPED_VELOCITY=0;
   void intake(int state);
+  void stopTOP();
   void run();
   void color_sort();
   void park();
