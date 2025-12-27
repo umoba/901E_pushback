@@ -14,3 +14,7 @@ Created a getState() function for the Intake class for better logic creation usi
 12.20
 
 Created a storage boolean value for easier logic creation 
+
+12.26
+Added/edited comments for some functions
+Changed rotational sensor values since it wasn't compatible with centidegrees.

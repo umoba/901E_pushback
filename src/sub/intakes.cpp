@@ -207,19 +207,13 @@ if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
   }
 }
 
-// Toggle whether the intake is stopping the blocks from scoring or not
-void Intake::toggleStopper() {
-  if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-      // stopper.toggle();
-      // stopped = !stopped;
-  }
-}
 
 // // Color sorting
 void Intake::color_sort() {
   if (Config::prematches.inAuton && Intake::getState() == 1) {
      coloring.set_led_pwm(50);
-    if ((coloring.get_hue() >= 25.0 && coloring.get_hue() <= 30.0 && !Config::prematches.allianceIsRed) || (coloring.get_hue() >= 180.0 && coloring.get_hue() <= 240.0 && Config::prematches.allianceIsRed)){
+    if ((coloring.get_hue() >= 25.0 && coloring.get_hue() <= 30.0 && !Config::prematches.allianceIsRed) 
+    || (coloring.get_hue() >= 180.0 && coloring.get_hue() <= 240.0 && Config::prematches.allianceIsRed)){
       Intake::intake(2);
       pros::delay(500);
       Intake::intake(1);

@@ -19,8 +19,6 @@ public:
   const int STOPPED_VELOCITY=0;
   void intake(int state);
   void run();
-  void runrev();
-  void toggleStopper();
   void color_sort();
   void park();
   int getState();
@@ -28,11 +26,6 @@ public:
   Intake();
 
 private:
-   // bool elevate;
-  int flexIntakeVelocityDeterminer();
-   int state;
-   /**
-    * @brief blue is false, red is true.
-    */
+  int state;
 };
 } // namespace Robot

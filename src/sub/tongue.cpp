@@ -8,11 +8,17 @@ using namespace Robot::Globals;
 
 Tongue::Tongue() {}
 
+
+void Tongue::toggle() {
+  tonguemech.toggle();
+    if (tonguemech.is_extended() && sprocketIntake.get_target_velocity() > 0) {
+      flexIntake.move_velocity(subsystem.intake.MAX_55_VELOCITY);
+    }
+}
+
 void Tongue::run() {
   if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-    tonguemech.toggle();
-    if (tonguemech.is_extended() && sprocketIntake.get_target_velocity() != 0) {
-      sprocketIntake.move_velocity(subsystem.intake.MAX_55_VELOCITY);
-    }
+    Tongue::toggle();
   }
 }
+

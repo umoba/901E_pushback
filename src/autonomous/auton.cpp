@@ -36,10 +36,10 @@ void Auton::selectedAuton(int route) {
   Uses the autonSelector rotation sensor to determine which auton to run
 */
 void Auton::autonSelection() {
-  for (int i = 0; i < 360; i += 30)  {
-    if (i <= autonSelector.get_position() && autonSelector.get_position() < i + 30) {
+  for (int i = 0; i < 36000; i += 3000)  {
+    if (i <= autonSelector.get_position() && autonSelector.get_position() < i + 3000) {
       
-      int routeNum = i / 30;
+      int routeNum = i / 3000;
       selectedAuton(routeNum);
 
       pros::lcd::print(1, "Auton Selector Value: %f", autonSelector.get_position());
