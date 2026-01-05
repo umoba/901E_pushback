@@ -21,9 +21,9 @@ namespace Robot {
     // Motors
     pros::MotorGroup right({-16, -17, -15},pros::MotorGearset::blue);
     pros::MotorGroup left({20, 18, 19},pros::MotorGearset::blue);
-    pros::Motor topIntake(11, pros::MotorGearset::green);
-    pros::Motor flexIntake(-10, pros::MotorGearset::green);
-    pros::Motor sprocketIntake(12, pros::MotorGearset::blue);
+    pros::Motor topIntake(14, pros::MotorGearset::green);
+    pros::Motor flexIntake(13, pros::MotorGearset::green);
+    pros::Motor sprocketIntake(2, pros::MotorGearset::blue);
 
 
     // Rotational

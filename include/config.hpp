@@ -18,18 +18,18 @@ namespace Robot {
     constexpr double TILE_IN = 24.0;
 
     // DIRECTION
-    bool POS_Y_HEADING_0 = true;
+    // bool POS_Y_HEADING_0 = true;
 
     // DISTANCE SENSOR OFFSETS
     // Robot frame: +X right, +Y forward
     constexpr double LEFT_DIST_X_IN = 7.5;
-    constexpr double LEFT_DIST_Y_IN = 0.0;
+    constexpr double LEFT_DIST_C_IN = 0.0;
 
     constexpr double RIGHT_DIST_X_IN = -7.5;
-    constexpr double RIGHT_DIST_Y_IN = 0.0;
+    constexpr double RIGHT_DIST_C_IN = 0.0;
 
     constexpr double BACK_DIST_X_IN = -7.5;
-    constexpr double BACK_DIST_Y_IN = -0.5;
+    constexpr double BACK_DIST_C_IN = -0.5;
 
     // SKILLS DISTANCE SENSOR CONFIGS
     constexpr double SKILLS_WALL_CLEARANCE_IN = 8.0;  // desired stop distance

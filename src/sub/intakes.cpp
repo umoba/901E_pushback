@@ -104,26 +104,22 @@ int Intake::getState() {
     state = 4;
   }
 
+  return state;
+}
+
 void Intake::stopTOP() {
   if (storage == true && ((coloring.get_hue() >= 25.0 && coloring.get_hue() <= 30.0) || (coloring.get_hue() >= 180.0 && coloring.get_hue() <= 240.0))) {
     topIntake.move_velocity(STOPPED_VELOCITY);
   }
 }
 
-
-
-
-
-  return state;
-}
-
 // Run the intake
 void Intake::run() {
-if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
+  if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
 
       midGoal.extend();
       int intakeState = sprocketIntake.get_direction(); // get current intake direction
-      pros::lcd::print(4, "intake state: %d", intakeState);
+      // pros::lcd::print(4, "intake state: %d", intakeState);
       if (intakeState==1){
         topIntake.move(0);
         sprocketIntake.move(0);
@@ -144,17 +140,17 @@ if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
     }
 
   // Long goal 
-    if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)) {
+  if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)) {
       midGoal.retract();
       int intakeState = sprocketIntake.get_direction(); // get current intake direction
-      pros::lcd::print(4, "intake state: %d", intakeState);
+      // pros::lcd::print(4, "intake state: %d", intakeState);
       if (intakeState==1){
         topIntake.move(0);
         flexIntake.move(0);
         sprocketIntake.move(0);
       }
       else{
-      topIntake.move(127); // run intake when piston is toggled
+      topIntake.move(-127); // run intake when piston is toggled
       flexIntake.move(127);
       sprocketIntake.move(127);
       }
@@ -163,7 +159,7 @@ if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
 // Outtake 
   if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)) {
       int intakeState = sprocketIntake.get_direction(); // get current intake direction
-      pros::lcd::print(4, "intake state: %d", intakeState);
+      // pros::lcd::print(4, "intake state: %d", intakeState);
       if (intakeState==-1){
         flexIntake.move(0);
         sprocketIntake.move(0);
@@ -180,9 +176,6 @@ if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
         }
       }
   }
-
-
-
   //R1 close hood storage 
   //R2 deactivate hood, long goal scoring 
   //L1 middle goal scoring, always close the hood (retracted)
@@ -190,13 +183,11 @@ if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
   //arrow up initiate wing 
   //X is tonguemech, retract after being pressed once again 
 
-
-
 //OUTAKE (Bottom score)
   if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1)) {
       midGoal.extend();
       int intakeState = sprocketIntake.get_direction(); // get current intake direction
-      pros::lcd::print(4, "intake state: %d", intakeState);
+      // pros::lcd::print(4, "intake state: %d", intakeState);
       if (intakeState==1){
         sprocketIntake.move(0);
         flexIntake.move(0);
