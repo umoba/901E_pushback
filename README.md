@@ -21,3 +21,8 @@ Changed rotational sensor values since it wasn't compatible with centidegrees.
 12.27
 Created a function that stops the top intake when the color sensor detects a block
 Create some more config and preset values for future application of distance sensors
+
+1.5
+
+Tested/Debugged drive control. 
+Confirmed that the middle goal antijamming works

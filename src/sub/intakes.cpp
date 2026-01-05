@@ -113,7 +113,7 @@ void Intake::stopTOP() {
   }
 }
 
-// Run the intake
+// Run the MID GOAL intake system
 void Intake::run() {
   if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
 
@@ -127,7 +127,7 @@ void Intake::run() {
       }
       else{
       Intake::intake(3);
-      pros::delay(300);
+      pros::delay(150);
       if (Config::prematches.skillsMode) {
         Intake::intake(4);
       }
@@ -150,7 +150,7 @@ void Intake::run() {
         sprocketIntake.move(0);
       }
       else{
-      topIntake.move(-127); // run intake when piston is toggled
+      topIntake.move(127); // run intake when piston is toggled
       flexIntake.move(127);
       sprocketIntake.move(127);
       }
@@ -176,14 +176,14 @@ void Intake::run() {
         }
       }
   }
-  //R1 close hood storage 
-  //R2 deactivate hood, long goal scoring 
+  //R1 store
+  //R2 score long
   //L1 middle goal scoring, always close the hood (retracted)
   //L2 outtake 
   //arrow up initiate wing 
   //X is tonguemech, retract after being pressed once again 
 
-//OUTAKE (Bottom score)
+//STORE
   if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1)) {
       midGoal.extend();
       int intakeState = sprocketIntake.get_direction(); // get current intake direction

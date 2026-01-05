@@ -21,7 +21,7 @@ namespace Robot {
     // Motors
     pros::MotorGroup right({-16, -17, -15},pros::MotorGearset::blue);
     pros::MotorGroup left({20, 18, 19},pros::MotorGearset::blue);
-    pros::Motor topIntake(14, pros::MotorGearset::green);
+    pros::Motor topIntake(-14, pros::MotorGearset::green);
     pros::Motor flexIntake(13, pros::MotorGearset::green);
     pros::Motor sprocketIntake(2, pros::MotorGearset::blue);
 
@@ -41,7 +41,7 @@ namespace Robot {
     pros::adi::Pneumatics  tonguemech('A', false);
     pros::adi::Pneumatics  wing('B', false);
     pros::adi::Pneumatics  doubleParking('C', false);
-    pros::adi::Pneumatics  midGoal('D', false);  
+    pros::adi::Pneumatics  midGoal('D', true);  
 
 
 
