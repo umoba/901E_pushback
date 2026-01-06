@@ -8,6 +8,7 @@ namespace Robot {
     public:
 
       void right7blocks();
+      void left7blocks();
 
 
       AutonomousRoutes();

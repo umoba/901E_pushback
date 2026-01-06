@@ -42,9 +42,9 @@ void Auton::autonSelection() {
       int routeNum = i / 3000;
       selectedAuton(routeNum);
 
-      pros::lcd::print(1, "Auton Selector Value: %f", autonSelector.get_position());
-      pros::lcd::print(2, "Auton Selector Set to: %d", autonRoute);
-      pros::lcd::print(3, "Route: %s", routeSpecifics[autonRoute]);
+      pros::lcd::print(5, "Auton Selector Value: %f", autonSelector.get_position());
+      pros::lcd::print(6, "Auton Selector Set to: %d", autonRoute);
+      pros::lcd::print(7, "Route: %s", routeSpecifics[autonRoute]);
     }
   }
 }

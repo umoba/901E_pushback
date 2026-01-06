@@ -23,6 +23,10 @@ Created a function that stops the top intake when the color sensor detects a blo
 Create some more config and preset values for future application of distance sensors
 
 1.5
-
 Tested/Debugged drive control. 
 Confirmed that the middle goal antijamming works
+
+1.6
+Added auton routes (7blocks on both sides with wing)
+Finished creating/applying the stopping algorithm for top intake
+Altered the brain screen

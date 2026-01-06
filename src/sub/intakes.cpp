@@ -56,7 +56,7 @@ void Intake::intake(int state) {
     sprocketIntake.move_velocity(-MAX_11_VELOCITY);
     flexIntake.move_velocity(-HALFED_55_VELOCITY);
   }
-  // 
+  // store
   else if (state == 6) {
     storage = true;
     topIntake.move_velocity(MAX_55_VELOCITY);
@@ -116,11 +116,12 @@ void Intake::stopTOP() {
 // Run the MID GOAL intake system
 void Intake::run() {
   if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
-
+      storage = false;
       midGoal.extend();
       int intakeState = sprocketIntake.get_direction(); // get current intake direction
       // pros::lcd::print(4, "intake state: %d", intakeState);
       if (intakeState==1){
+        stora
         topIntake.move(0);
         sprocketIntake.move(0);
         flexIntake.move(0); 
@@ -142,6 +143,7 @@ void Intake::run() {
   // Long goal 
   if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)) {
       midGoal.retract();
+      storage = false;
       int intakeState = sprocketIntake.get_direction(); // get current intake direction
       // pros::lcd::print(4, "intake state: %d", intakeState);
       if (intakeState==1){
@@ -158,7 +160,8 @@ void Intake::run() {
 
 // Outtake 
   if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)) {
-      int intakeState = sprocketIntake.get_direction(); // get current intake direction
+    storage = false;
+    int intakeState = sprocketIntake.get_direction(); // get current intake direction
       // pros::lcd::print(4, "intake state: %d", intakeState);
       if (intakeState==-1){
         flexIntake.move(0);
@@ -186,6 +189,7 @@ void Intake::run() {
 //STORE
   if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1)) {
       midGoal.extend();
+      storage = true;
       int intakeState = sprocketIntake.get_direction(); // get current intake direction
       // pros::lcd::print(4, "intake state: %d", intakeState);
       if (intakeState==1){

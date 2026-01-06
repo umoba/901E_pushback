@@ -23,11 +23,16 @@ void initialize() {
   chassis.calibrate();
   pros::Task screenTask([&]() {
     while (true) {
-      
+      subsystem.intake.stopTOP();
+
       autonSystem.auton.autonSelection();
         
       // print robot location to the brain screen
-      pros::lcd::print(0, "X: %f", chassis.getPose().x, "| Y: %f", chassis.getPose().y, "| Theta: %f", chassis.getPose().theta); // x, y, theta
+      pros::lcd::print(0, "X: %f", chassis.getPose().x);
+      pros::lcd::print(1, "Y: %f", chassis.getPose().y);
+      pros::lcd::print(2, "Theta: %f", chassis.getPose().theta);
+      
+
       // lines 1-3 reserved for auton selection
 
 
