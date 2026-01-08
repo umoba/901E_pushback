@@ -17,7 +17,7 @@ void Tongue::toggle() {
 }
 
 void Tongue::run() {
-  if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+  if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
     Tongue::toggle();
   }
 }

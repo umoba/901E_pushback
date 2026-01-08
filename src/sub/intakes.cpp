@@ -24,9 +24,10 @@ void Intake::intake(int state) {
   // long goal
   else if (state == 1) {
     storage = false;
+    midGoal.retract();
     topIntake.move_velocity(MAX_55_VELOCITY);
     sprocketIntake.move_velocity(MAX_11_VELOCITY);
-    flexIntake.move_velocity(HALFED_55_VELOCITY);
+    flexIntake.move_velocity(MAX_55_VELOCITY);
   }
   // upper goal
   else if (state == 2) {
@@ -58,10 +59,11 @@ void Intake::intake(int state) {
   }
   // store
   else if (state == 6) {
+    midGoal.extend();
     storage = true;
-    topIntake.move_velocity(MAX_55_VELOCITY);
-    sprocketIntake.move_velocity(MAX_11_VELOCITY);
-    flexIntake.move_velocity(HALFED_55_VELOCITY);
+    flexIntake.move(127);
+      sprocketIntake.move(127);
+      topIntake.move(127); // run intake when piston is toggled
 
   }
 
@@ -108,7 +110,7 @@ int Intake::getState() {
 }
 
 void Intake::stopTOP() {
-  if (storage == true && ((coloring.get_hue() >= 25.0 && coloring.get_hue() <= 30.0) || (coloring.get_hue() >= 180.0 && coloring.get_hue() <= 240.0))) {
+  if (storage == true && ((coloring.get_hue() >= 0 && coloring.get_hue() <= 30.0) || (coloring.get_hue() >= 190.0 && coloring.get_hue() <= 210.0))) {
     topIntake.move_velocity(STOPPED_VELOCITY);
   }
 }
@@ -116,12 +118,10 @@ void Intake::stopTOP() {
 // Run the MID GOAL intake system
 void Intake::run() {
   if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
-      storage = false;
       midGoal.extend();
       int intakeState = sprocketIntake.get_direction(); // get current intake direction
       // pros::lcd::print(4, "intake state: %d", intakeState);
       if (intakeState==1){
-        stora
         topIntake.move(0);
         sprocketIntake.move(0);
         flexIntake.move(0); 
@@ -133,6 +133,7 @@ void Intake::run() {
         Intake::intake(4);
       }
       else {
+        storage = false;
         topIntake.move(-127); // run intake when piston is toggled
         sprocketIntake.move(127); // run intake when piston is toggled
         flexIntake.move(127);
@@ -143,7 +144,6 @@ void Intake::run() {
   // Long goal 
   if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)) {
       midGoal.retract();
-      storage = false;
       int intakeState = sprocketIntake.get_direction(); // get current intake direction
       // pros::lcd::print(4, "intake state: %d", intakeState);
       if (intakeState==1){
@@ -152,6 +152,7 @@ void Intake::run() {
         sprocketIntake.move(0);
       }
       else{
+        storage = false;
       topIntake.move(127); // run intake when piston is toggled
       flexIntake.move(127);
       sprocketIntake.move(127);
@@ -160,7 +161,6 @@ void Intake::run() {
 
 // Outtake 
   if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)) {
-    storage = false;
     int intakeState = sprocketIntake.get_direction(); // get current intake direction
       // pros::lcd::print(4, "intake state: %d", intakeState);
       if (intakeState==-1){
@@ -173,6 +173,7 @@ void Intake::run() {
           Intake::intake(5);
         }
         else {
+          storage = false;
           topIntake.move(-127); // run intake when piston is toggled
           sprocketIntake.move(-127); // run intake when piston is toggled
           flexIntake.move(-127);
@@ -189,7 +190,6 @@ void Intake::run() {
 //STORE
   if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1)) {
       midGoal.extend();
-      storage = true;
       int intakeState = sprocketIntake.get_direction(); // get current intake direction
       // pros::lcd::print(4, "intake state: %d", intakeState);
       if (intakeState==1){
@@ -198,6 +198,7 @@ void Intake::run() {
         topIntake.move(0);
       }
       else{
+        storage = true;
       flexIntake.move(127);
       sprocketIntake.move(127);
       topIntake.move(127); // run intake when piston is toggled
@@ -210,9 +211,10 @@ void Intake::run() {
 // // Color sorting
 void Intake::color_sort() {
   if (Config::prematches.inAuton && Intake::getState() == 1) {
+  // if (Intake::getState() == 1) {
      coloring.set_led_pwm(50);
-    if ((coloring.get_hue() >= 25.0 && coloring.get_hue() <= 30.0 && !Config::prematches.allianceIsRed) 
-    || (coloring.get_hue() >= 180.0 && coloring.get_hue() <= 240.0 && Config::prematches.allianceIsRed)){
+    if ((coloring.get_hue() >= 0 && coloring.get_hue() <= 30.0 && !Config::prematches.allianceIsRed) 
+    || (coloring.get_hue() >= 190.0 && coloring.get_hue() <= 210.0 && Config::prematches.allianceIsRed)){
       Intake::intake(2);
       pros::delay(500);
       Intake::intake(1);

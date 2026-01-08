@@ -14,15 +14,15 @@ namespace Robot {
     AutonSystem autonSystem;
 
     // IMU
-    pros::Imu imu(13);
+    pros::Imu imu(12);
     // Controller
     pros::Controller master(pros::E_CONTROLLER_MASTER);
 
     // Motors
-    pros::MotorGroup right({-16, -17, -15},pros::MotorGearset::blue);
-    pros::MotorGroup left({20, 18, 19},pros::MotorGearset::blue);
+    pros::MotorGroup right({16, 17, 15},pros::MotorGearset::blue);
+    pros::MotorGroup left({-20, -18, -19},pros::MotorGearset::blue);
     pros::Motor topIntake(-14, pros::MotorGearset::green);
-    pros::Motor flexIntake(13, pros::MotorGearset::green);
+    pros::Motor flexIntake(-13, pros::MotorGearset::green);
     pros::Motor sprocketIntake(2, pros::MotorGearset::blue);
 
 
@@ -43,6 +43,10 @@ namespace Robot {
     pros::adi::Pneumatics  doubleParking('C', false);
     pros::adi::Pneumatics  midGoal('D', true);  
 
+// 13.625
+// 6.8125
+// 6.5
+
 
 
 
@@ -50,7 +54,7 @@ namespace Robot {
     // horizontal tracking wheel encoder. Rotation sensor, port 20, not reversed
     // pros::Rotation horizontalEnc(-11);
     // vertical tracking wheel encoder. Rotation sensor, port 11, reversed
-    pros::Rotation verticalEnc(1);
+    pros::Rotation verticalEnc(11);
 
 
     // lemlib
@@ -58,22 +62,22 @@ namespace Robot {
     // horizontal tracking wheel. 2.75" diameter, 5.75" offset, back of the robot (negative)
     // lemlib::TrackingWheel horizontal(&horizontalEnc, lemlib::Omniwheel::NEW_275, -1.375);
     // vertical tracking wheel. 2.75" diameter, 2.5" offset, left of the robot (negative)
-    lemlib::TrackingWheel vertical(&verticalEnc, lemlib::Omniwheel::NEW_2, 1.0);
-
+    lemlib::TrackingWheel vertical(&verticalEnc, lemlib::Omniwheel::NEW_2, -0.375);
+// 13.125
    
     // drivetrain settings
     lemlib::Drivetrain drivetrain(&left, // left motor group
       &right, // right motor group
-      12, // 10 inch track width
+      10.75, // 10.75 inch track width
       lemlib::Omniwheel::NEW_325, // using new 3.25" omnis
       450, // drivetrain rpm is 360
       8 // horizontal drift is 2. If we had traction wheels, it would have been 8
     );
 
     // lateral PID controller
-    lemlib::ControllerSettings lateral_controller(3.7, // proportional gain (kP)
+    lemlib::ControllerSettings lateral_controller(13.3, // proportional gain (kP)
                                                 0, // integral gain (kI)
-                                                25, // derivative gain (kD)
+                                                60, // derivative gain (kD)
                                                 0, // anti windup
                                                 0, // small error range, in inches
                                                 0, // small error range timeout, in milliseconds
@@ -83,7 +87,7 @@ namespace Robot {
     );
 
     // angular PID controller
-    lemlib::ControllerSettings angular_controller(5.5, // proportional gain (kP)
+    lemlib::ControllerSettings angular_controller(7, // proportional gain (kP)
                                                 0, // integral gain (kI)
                                                 25, // derivative gain (kD)
                                                 0, // anti windup
