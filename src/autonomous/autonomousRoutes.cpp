@@ -7,6 +7,7 @@
 #include "config.hpp"
 #include "globals.h"// IWYU pragma: keep
 #include "pros/misc.h"
+#include "autonomous_headers/distanceAlgo.hpp"
 
 using namespace Robot;
 using namespace Robot::Globals;
@@ -201,20 +202,25 @@ void AutonomousRoutes::skills() {
   tonguemech.toggle();
   chassis.moveToPoint(-45, 61, 1000, {true, 100, 0});
   chassis.turnToHeading(270, 700);
-  chassis.moveToPoint(45, 61, 3000, {false, 100, 0});
+  chassis.moveToPoint(45, 59, 3000, {false, 100, 0});
   pros::delay(700);
-  chassis.turnToHeading(180, 500);
+  
+  chassis.turnToHeading(180, 1000);
   chassis.moveToPoint(45, 45.5, 800, {true, 100, 0});
+  chassis.turnToHeading(180, 500);
+  
+  // add hard reset here
+  chassis.setPose(autonSystem.distanceAlgo.leftDist(), autonSystem.distanceAlgo.backDist(), 180);
+
   chassis.turnToHeading(270, 400);
+
   chassis.moveToPoint(30, 44, 1200, {true, 110, 0});
   pros::delay(1000);
   subsystem.intake.intake(1);
   chassis.moveToPoint(20, 45.5, 1000, {true, 110, 50});
 
   pros::delay(500);
-  
-  chassis.setPose(30, 47.5, chassis.getPose().theta);
-  pros::delay(2000);
+    pros::delay(2000);
 
 
   // Second Matchloader

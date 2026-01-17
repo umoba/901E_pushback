@@ -45,3 +45,6 @@ AWP route needs extra tuning before nationals, and skills route is only 25% fini
 
 1.17
 Changed intake control for usability
+Created distanceAlgo class for adding hard reset through distance sensors. -> Already applied in line 213 in autonomousRoutes.cpp
+Needs to modify offests for the distance sensor -> private constant in distanceAlgo class.
+

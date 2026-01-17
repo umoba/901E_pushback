@@ -2,6 +2,7 @@
 
 
 #include "api.h" // IWYU pragma: keep
+#include "autonomous_headers/distanceAlgo.hpp"
 #include "filteredIMU.h"
 #include "lemlib/pid.hpp"
 #include "liblvgl/misc/lv_color.h" // IWYU pragma: keep
@@ -28,6 +29,7 @@ namespace Robot {
     struct AutonSystem {
       Robot::Auton auton;
       Robot::AutonomousRoutes autonomousRoutes;
+      Robot::distanceAlgo distanceAlgo;
     };
     extern AutonSystem autonSystem;
 

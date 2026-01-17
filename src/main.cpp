@@ -80,7 +80,6 @@ void autonomous() {
  */
 void opcontrol() {
   subsystem.intake.intake(0);
-  // chassis.setPose(-46.254, 0.198, 0);
   whileAuton = false;
   int leftStick, rightStick;
   while (true) {
