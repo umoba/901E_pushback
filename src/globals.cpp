@@ -22,18 +22,18 @@ namespace Robot {
     pros::MotorGroup right({16, 17, 15},pros::MotorGearset::blue);
     pros::MotorGroup left({-20, -18, -19},pros::MotorGearset::blue);
     pros::Motor topIntake(-14, pros::MotorGearset::green);
-    pros::Motor flexIntake(-13, pros::MotorGearset::green);
-    pros::Motor sprocketIntake(2, pros::MotorGearset::blue);
+    pros::Motor flexIntake(2, pros::MotorGearset::green);
+    pros::Motor sprocketIntake(21, pros::MotorGearset::blue);
 
 
     // Rotational
-    pros::Rotation autonSelector(2);
+    pros::Rotation autonSelector(5);
 
     // Optical
     pros::Optical coloring(21);
 
     // // Distance
-    pros::Distance back(5);
+    pros::Distance back(22);
     pros::Distance leftD(16);
     pros::Distance rightD(17);
 
@@ -75,10 +75,10 @@ namespace Robot {
     );
 
     // lateral PID controller
-    lemlib::ControllerSettings lateral_controller(13.3, // proportional gain (kP)
-                                                0, // integral gain (kI)
-                                                60, // derivative gain (kD)
-                                                0, // anti windup
+    lemlib::ControllerSettings lateral_controller(14, // proportional gain (kP)
+                                                5.5, // integral gain (kI)
+                                                78, // derivative gain (kD)
+                                                -3, // anti windup
                                                 0, // small error range, in inches
                                                 0, // small error range timeout, in milliseconds
                                                 0, // large error range, in inches
@@ -87,10 +87,10 @@ namespace Robot {
     );
 
     // angular PID controller
-    lemlib::ControllerSettings angular_controller(7, // proportional gain (kP)
-                                                0, // integral gain (kI)
-                                                25, // derivative gain (kD)
-                                                0, // anti windup
+    lemlib::ControllerSettings angular_controller(9, // proportional gain (kP)
+                                                2, // integral gain (kI)
+                                                65, // derivative gain (kD)
+                                                -2, // anti windup
                                                 0, // small error range, in inches
                                                 0, // small error range timeout, in milliseconds
                                                 0, // large error range, in inches

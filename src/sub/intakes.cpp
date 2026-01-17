@@ -33,8 +33,12 @@ void Intake::intake(int state) {
   else if (state == 2) {
     storage = false;
     topIntake.move_velocity(-MAX_55_VELOCITY);
+    sprocketIntake.move_velocity(-MAX_11_VELOCITY);
+    flexIntake.move_velocity(-HALFED_55_VELOCITY);
+    pros::delay(150);
+    topIntake.move_velocity(-MAX_55_VELOCITY);
     sprocketIntake.move_velocity(MAX_11_VELOCITY);
-    flexIntake.move_velocity(HALFED_55_VELOCITY);
+    flexIntake.move_velocity(MAX_55_VELOCITY);
   }
   // low goal
   else if (state == 3) {
@@ -68,7 +72,8 @@ void Intake::intake(int state) {
   }
 
   else if (state == 7) {
-
+    topIntake.move_velocity(-MAX_55_VELOCITY);
+    sprocketIntake.move_velocity(-MAX_11_VELOCITY);
   }
 
   else if (state == 8) {
@@ -127,17 +132,24 @@ void Intake::run() {
         flexIntake.move(0); 
       }
       else{
-      Intake::intake(3);
-      pros::delay(150);
-      if (Config::prematches.skillsMode) {
-        Intake::intake(4);
-      }
-      else {
-        storage = false;
-        topIntake.move(-127); // run intake when piston is toggled
-        sprocketIntake.move(127); // run intake when piston is toggled
-        flexIntake.move(127);
-      }
+      topIntake.move_velocity(-MAX_55_VELOCITY);
+    sprocketIntake.move_velocity(-MAX_11_VELOCITY);
+    // flexIntake.move_velocity(-HALFED_55_VELOCITY);
+    pros::delay(250);
+    topIntake.move_velocity(-150);
+    sprocketIntake.move_velocity(-MAX_11_VELOCITY);
+    flexIntake.move_velocity(MAX_55_VELOCITY);
+    flexIntake.move_velocity(HALFED_55_VELOCITY);
+      // if (Config::prematches.skillsMode) {
+      // // if (true) {
+      //   Intake::intake(4);
+      // }
+      // else {
+      //   storage = false;
+      //   topIntake.move(-80); // run intake when piston is toggled
+      //   sprocketIntake.move(127); // run intake when piston is toggled
+      //   flexIntake.move(127);
+      // }
       }
     }
 

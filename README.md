@@ -30,3 +30,15 @@ Confirmed that the middle goal antijamming works
 Added auton routes (7blocks on both sides with wing)
 Finished creating/applying the stopping algorithm for top intake
 Altered the brain screen
+
+1.7-1.16
+Checked if the auton route selector works. Needs check with field switch. 
+Added AWP route and part of skills route
+AWP route needs extra tuning before nationals, and skills route is only 25% finished. 
+
+# To do:
+1. Finish Skills route
+2. Tune AWP
+3. Finish match routes
+4. Check if auton selector works with field switch
+5. tune intake for skills

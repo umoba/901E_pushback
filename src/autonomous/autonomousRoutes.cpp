@@ -12,8 +12,8 @@ using namespace Robot;
 using namespace Robot::Globals;
 
 AutonomousRoutes::AutonomousRoutes() {}
+// NEEDS TUNING
 void AutonomousRoutes::right7blocks() {
-// FINISHED AUTONOMOUS ROUTES
   // setting pose for autonomous route
     chassis.setPose(-57,-15, 270);
     //heading to three balls + intake + tongue out
@@ -29,8 +29,9 @@ void AutonomousRoutes::right7blocks() {
     chassis.moveToPoint(-47, -45, 1500); //heading: 270
     chassis.turnToHeading(90, 1500);
     //Intake from match loader 
-    chassis.moveToPoint(-65, -47, 1500, {false}); //heading: 270
-     pros::delay(1200);
+    chassis.moveToPoint(-65, -47, 800, {false, 90}); //heading: 270
+        chassis.moveToPoint(-65, -47, 700, {false, 65}); 
+     pros::delay(700);
 
     // Stop intake first, go straight to long goal 
     //score in long goal 
@@ -41,69 +42,188 @@ void AutonomousRoutes::right7blocks() {
     subsystem.intake.intake(6);
     tonguemech.toggle();
     chassis.moveToPoint(-47, -45, 800, {false});
-    chassis.moveToPoint(-28, -39, 800);
-    chassis.moveToPoint(-7, -39, 4000);
-
+    chassis.moveToPoint(-25, -39, 800);
+    chassis.moveToPoint(-15, -39, 4000);
 }
 
+// NEEDS TUNING
 void AutonomousRoutes::left7blocks() {
-    // setting pose for autonomous route
-    chassis.setPose(-57,16, 0);
-
+chassis.setPose(-57,15, 270);
     //heading to three balls + intake + tongue out
-    chassis.moveToPoint(-22, 21, 1000);//heading: 124
+    chassis.moveToPoint(-28.5, 20.5, 1000, {false});//heading: 55.849 
+    subsystem.intake.intake(6);
+    pros::delay(715);
+    tonguemech.toggle();
+    pros::delay(550);
+    
 
     //Turn around, keep tongue out.
+
+    chassis.moveToPoint(-47, 47, 1500); //heading: 270
+    chassis.turnToHeading(90, 1500);
     //Intake from match loader 
-    chassis.moveToPoint(-57, -47, 1000); //heading: 270
+    chassis.moveToPoint(-60, 47, 800, {false, 90}); //heading: 270
+     chassis.moveToPoint(-73, 47, 750, {false, 55});
+     pros::delay(790);
 
     // Stop intake first, go straight to long goal 
     //score in long goal 
-    chassis.moveToPoint(-30, -47, 1000); //270
-
-    //back up a bit, wing on 
-    chassis.moveToPoint(-34,-47, 1000); //46
-    chassis.moveToPoint(-34,-38,1000); //270
-
-    //drive straight to push balls into center 
-    chassis.moveToPoint(-16, -38, 1000);// 81
+    chassis.moveToPoint(-30, 47, 500, {true, 127, 50}); //271.246
+    chassis.moveToPoint(-20, 47, 500, {true, 53});
+    pros::delay(500);
+    subsystem.intake.intake(1);
+    pros::delay(2000);
+    subsystem.intake.intake(6);
+    tonguemech.toggle();
+    chassis.moveToPoint(-47.5, 47, 800, {false});
+    chassis.moveToPoint(-30, 56.1, 800);
+    chassis.moveToPoint(-13.3, 54.2, 4000);
 }
-// void AutonomousRoutes::right8block() {
-  //     chassis.setPose(-57, -15, 270);
-  // //intake 3 mid balls
-  // chassis.moveToPoint(-31,-20,1000, {false});
-  // subsystem.intake.intake(6);
-  // pros::delay(800);
-  // tonguemech.toggle();
-  // pros::delay(300);
-  // tonguemech.toggle();
-  // pros::delay(600);
-  // chassis.turnToHeading(315, 800);
-  // //intake long goal balls 
-  // chassis.moveToPoint(-9.5,-41.8,1100, {false, 80});
-  // pros::delay(1000);
-  // tonguemech.toggle();
-  // chassis.moveToPoint(-29,-27,850);
-  // subsystem.intake.intake(0);
-  // pros::delay(100);
-  // tonguemech.toggle();
-  // chassis.turnToHeading(225, 800);
-  // //score in low goal 
-  // chassis.moveToPoint(-13.8,-9.8,1200, {false, 80});
-  // pros::delay(1000);
-  // subsystem.intake.intake(3);
-  // pros::delay(2000);
-  // subsystem.intake.intake(6);
-  // chassis.moveToPoint(-47, -47, 1900);
-  // chassis.turnToHeading(90, 900);
-  // tonguemech.toggle();
+// NOT FINISHED
+void AutonomousRoutes::right36() {
+    chassis.setPose(-57, -15, 270);
+  //intake 3 mid balls
+  chassis.moveToPoint(-30,-20,950, {false});
+  subsystem.intake.intake(6);
+  pros::delay(700);
+  tonguemech.toggle();
+  //intake long goal balls 
+  chassis.moveToPoint(-14, -42.5, 950, {false});
+  pros::delay(400);
+  tonguemech.toggle();
+  pros::delay(600);
+  tonguemech.toggle();
+  chassis.moveToPoint(-40,-15,1000);
 
-  // //intake from match loader
-  // chassis.moveToPoint(-68,-47, 1200, {false});
-  // pros::delay(1700);
+  chassis.moveToPoint(-47,-47,1000);
+  pros::delay(950);
+  subsystem.intake.intake(1);
+}
 
-  // //score in long goal
-  // chassis.moveToPoint(-30, -47, 1000);
-  // pros::delay(1000);
-  // subsystem.intake.intake(1);
-// }
+// NOT STARTED
+void AutonomousRoutes::left36() {
+
+}
+
+// NEEDS TUNING
+void AutonomousRoutes::soloAWP() {
+  // AWP
+  // START
+  chassis.setPose(-46.254, 0.198, 180);
+  subsystem.intake.intake(6);
+  chassis.moveToPoint(-46.254, 5, 300, {false});
+  chassis.moveToPoint(-46.254, -40, 950, {true, 100, 0});
+  chassis.turnToHeading(90, 300);
+  tonguemech.toggle();
+  subsystem.intake.intake(6);
+  // GO TO MATCH LOAD
+  chassis.moveToPoint(-65, -45, 950, {false, 90, 50});
+
+
+  // GO TO LONG GOAL
+  chassis.moveToPoint(-24, -45, 700, {true, 100, 50});
+  pros::delay(650);
+  // SCORE IN LONG GOAL
+  subsystem.intake.intake(1);
+  pros::delay(1300);
+
+  subsystem.intake.intake(6);
+  tonguemech.toggle(); //retract
+
+  // GO BACK A BIT
+  chassis.moveToPoint(-35, -39, 300, {false, 95, 0});
+  chassis.turnToHeading(220, 300);
+
+  // GET THREE BLOCKS
+  chassis.moveToPoint(-18, -23, 1100, {false, 90, 0});
+  pros::delay(940);
+  tonguemech.toggle(); //extend
+
+  chassis.turnToHeading(180, 300);
+ //retract
+
+  // GET OTHER THREE BLOCKS
+  chassis.moveToPoint(-16, 24, 1500, {false, 90, 0});
+  pros::delay(200);
+  tonguemech.toggle();
+  pros::delay(750);
+  tonguemech.toggle(); //extend
+  chassis.turnToHeading(135, 400);
+
+  // MOVE TO MID UPPER
+  chassis.moveToPose(-1, 14, 135,1000);
+  pros::delay(800);
+  subsystem.intake.intake(2);
+  pros::delay(1100);
+
+  // BACK AWAY
+  chassis.moveToPoint(-47, 53, 1000, {false, 100, 50});
+  subsystem.intake.intake(7);
+  pros::delay(80);
+  subsystem.intake.intake(6);
+  chassis.turnToHeading(90, 400);
+
+  // GO TO MATCH LOAD
+  chassis.moveToPoint(-63, 53, 900, {false, 90, 0});
+
+  // GO TO LONG GOAL
+  chassis.moveToPoint(-24, 50, 900, {true, 100, 60});
+  pros::delay(800);
+  subsystem.intake.intake(1);
+}
+
+void AutonomousRoutes::skills() {
+  // TO BE FILLED
+
+  // Initialize starting pose
+  chassis.setPose(-46, 14.7, 270);
+  subsystem.intake.intake(6);
+  chassis.moveToPoint(-33.6, 14.7, 1000, {false});
+  chassis.turnToHeading(225, 500);
+  chassis.moveToPoint(-29.567, 18.067, 800, {false});
+  chassis.moveToPose(-9.026, 11.077, 135, 1700);
+  pros::delay(1500);
+  subsystem.intake.intake(2);
+  pros::delay(850);
+  subsystem.intake.intake(1);
+  chassis.moveToPoint(-40, 48, 1700, {false, 100, 0});
+  chassis.turnToHeading(90, 350);
+  tonguemech.toggle();
+  chassis.moveToPoint(-65, 48, 1500, {false, 70, 0});
+  pros::delay(1000);
+  subsystem.intake.intake(6);
+  pros::delay(600);
+  // First Matchloader
+  chassis.moveToPoint(-65, 48, 400, {false, 70, 0});
+  pros::delay(600);
+  chassis.moveToPoint(-50, 48, 1000, {false, 100, 0});
+   pros::delay(300);
+  tonguemech.toggle();
+  chassis.moveToPoint(-45, 61, 1000, {true, 100, 0});
+  chassis.turnToHeading(270, 700);
+  chassis.moveToPoint(45, 61, 3000, {false, 100, 0});
+  pros::delay(700);
+  chassis.turnToHeading(180, 500);
+  chassis.moveToPoint(45, 45.5, 800, {true, 100, 0});
+  chassis.turnToHeading(270, 400);
+  chassis.moveToPoint(30, 44, 1200, {true, 110, 0});
+  pros::delay(1000);
+  subsystem.intake.intake(1);
+  chassis.moveToPoint(20, 45.5, 1000, {true, 110, 50});
+
+  pros::delay(500);
+  
+  chassis.setPose(30, 47.5, chassis.getPose().theta);
+  pros::delay(2000);
+
+
+  // Second Matchloader
+  subsystem.intake.intake(6);
+  chassis.moveToPoint(70, 45, 1000, {false, 70, 0});
+  tonguemech.toggle();
+  pros::delay(2000);
+  chassis.moveToPoint(30, 45, 1000, {true, 100, 0});
+  pros::delay(950);
+  subsystem.intake.intake(1);
+
+}

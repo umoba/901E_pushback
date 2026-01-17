@@ -9,6 +9,10 @@ namespace Robot {
 
       void right7blocks();
       void left7blocks();
+      void soloAWP();
+      void right36();
+      void left36();
+      void skills();
 
 
       AutonomousRoutes();

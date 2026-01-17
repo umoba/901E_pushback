@@ -9,16 +9,16 @@ using namespace Robot::Globals;
 
 Auton::Auton() : autonRoute(0), routeSpecifics(
   "No Auton",
-  "Right Low Goal",
-  "Left Low Goal",
+  "Solo AWP",
+  "Right 3 + 6",
   "Right 7 Block",
   "Left 7 Block",
-  "Skills Part 1",
-  "Skills Part 2",
-  "Right Mid Goal",
-  "Left Mid Goal",
-  "Right High Goal",
-  "Left High Goal",
+  "Left 3 + 6",
+  "Skills",
+  "---",
+  "---",
+  "---",
+  "---",
   "Full Skills") 
   
   {}
@@ -56,10 +56,12 @@ void Auton::runSelectedAuton(int route) {
       // No auton
       break;
     case 1:
-      // Right Low Goal
+      // Solo AWP
+      autonSystem.autonomousRoutes.soloAWP();
       break;
     case 2:
-      // Left Low Goal
+      // Right 3 + 6
+      autonSystem.autonomousRoutes.right36();
       break;
     case 3:
       // Right 7 Block
@@ -67,12 +69,15 @@ void Auton::runSelectedAuton(int route) {
       break;
     case 4:
       // Left 7 Block
+      autonSystem.autonomousRoutes.left7blocks();
       break;
     case 5:
-      // Skills Part 1
+      // Left 3 + 6
+      autonSystem.autonomousRoutes.left36();
       break;
     case 6:
-      // Skills Part 2
+      // Skills 
+      autonSystem.autonomousRoutes.skills();
       break;
     case 7:
       // Right Mid Goal

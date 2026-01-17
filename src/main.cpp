@@ -29,7 +29,7 @@ void initialize() {
       subsystem.intake.stopTOP();
       }
       // subsystem.intake.color_sort();
-      // autonSystem.auton.autonSelection();
+      autonSystem.auton.autonSelection();
         
       // print robot location to the brain screen
       pros::lcd::print(0, "X: %f", chassis.getPose().x);
@@ -64,56 +64,47 @@ void competition_initialize() {
 
 // autonSystem.auton.runSelectedAuton(autonSystem.auton.autonRoute);
 
+
+  // chassis.setPose(0,0,0);
+  // // chassis.moveToPoint(0,24,10000);
+  // chassis.turnToHeading(180,10000);
+
 void autonomous() {
-  // setting pose for autonomous route
-    chassis.setPose(-57,15, 270);
-    //heading to three balls + intake + tongue out
-    chassis.moveToPoint(-33, 20, 1000, {false});//heading: 55.849 
-    subsystem.intake.intake(6);
-    pros::delay(800);
-    tonguemech.toggle();
-    pros::delay(600);
-    
-
-    //Turn around, keep tongue out.
-
-    chassis.moveToPoint(-47, 47, 1500); //heading: 270
-    chassis.turnToHeading(90, 1500);
-    //Intake from match loader 
-    chassis.moveToPoint(-58, 47, 1000, {false, 78}); //heading: 270
-     chassis.moveToPoint(-67, 47, 600, {false, 40});
-     pros::delay(1000);
-
-    // Stop intake first, go straight to long goal 
-    //score in long goal 
-    chassis.moveToPoint(-30, 47, 500, {true, 127, 50}); //271.246
-    chassis.moveToPoint(-20, 47, 500, {true, 45});
-    pros::delay(500);
-    subsystem.intake.intake(1);
-    pros::delay(2000);
-    subsystem.intake.intake(6);
-    tonguemech.toggle();
-    chassis.moveToPoint(-47, 47, 800, {false});
-    chassis.moveToPoint(-30, 57, 800);
-    chassis.moveToPoint(-8, 54, 4000);
+  // autonSystem.auton.runSelectedAuton(autonSystem.auton.autonRoute);
+  autonSystem.auton.runSelectedAuton(6);
 
 }
-
+// 
 /**
  * Runs in driver control
  */
 void opcontrol() {
+  subsystem.intake.intake(0);
+  // chassis.setPose(-46.254, 0.198, 0);
   whileAuton = false;
+  int leftStick, rightStick;
   while (true) {
     // run the subsystems
     subsystem.intake.run();
     subsystem.tongue.run();
-
+    
     // Tank Drive
     int dir = master.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
     int turn = master.get_analog(ANALOG_RIGHT_Y);  // Gets the turn left/right from right joystick
-    left.move(dir);                      // Sets left motor voltage
-    right.move(turn); 
+    if (dir<= 0) {
+      leftStick = -dir * dir * 1/127;
+    }
+    else {
+      leftStick = dir * dir * 1/127;
+    }
+    if (turn <= 0) {
+      rightStick = -turn * turn * 1/127;
+    }
+    else {
+      rightStick = turn * turn * 1/127;
+    }
+    left.move(leftStick);                      // Sets left motor voltage
+    right.move(rightStick); 
 
   
   
