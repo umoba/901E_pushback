@@ -42,3 +42,6 @@ AWP route needs extra tuning before nationals, and skills route is only 25% fini
 3. Finish match routes
 4. Check if auton selector works with field switch
 5. tune intake for skills
+
+1.17
+Changed intake control for usability

@@ -158,7 +158,7 @@ void Intake::run() {
       midGoal.retract();
       int intakeState = sprocketIntake.get_direction(); // get current intake direction
       // pros::lcd::print(4, "intake state: %d", intakeState);
-      if (intakeState==1){
+      if (intakeState==1 && storage==false){
         topIntake.move(0);
         flexIntake.move(0);
         sprocketIntake.move(0);
