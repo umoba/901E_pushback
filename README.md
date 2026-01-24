@@ -48,3 +48,15 @@ Changed intake control for usability
 Created distanceAlgo class for adding hard reset through distance sensors. -> Already applied in line 213 in autonomousRoutes.cpp
 Needs to modify offests for the distance sensor -> private constant in distanceAlgo class.
 
+1.18 - 1.22
+Finished skills route and implemented distance sensor algorithm. 
+Created all 5 match autons, finished all of them. They all need possible fine tuning for better accuracy
+Changed speed of intake for scoring mid goal for consistent 7 block bonus
+
+
+# Final To do before nationals:
+1. Add driver setting for skills
+2. use setBrake at the end of the auton to strengthen the chassis and make sure to not lose control zone
+3. Fine tune all autons, including skills and maximize score.
+4. change timeout values for skills auton. 
+5. If needed, change autons for 3-4/6-wing autons so that it is more consistent.

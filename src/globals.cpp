@@ -33,9 +33,9 @@ namespace Robot {
     pros::Optical coloring(21);
 
     // // Distance
-    pros::Distance back(22);
-    pros::Distance leftD(16);
-    pros::Distance rightD(17);
+    pros::Distance back(9);
+    pros::Distance leftD(3);
+    pros::Distance rightD(4);
 
     // Pneumatics
     pros::adi::Pneumatics  tonguemech('A', false);
@@ -76,8 +76,8 @@ namespace Robot {
 
     // lateral PID controller
     lemlib::ControllerSettings lateral_controller(14, // proportional gain (kP)
-                                                5.5, // integral gain (kI)
-                                                78, // derivative gain (kD)
+                                                5.8, // integral gain (kI)
+                                                82, // derivative gain (kD)
                                                 -3, // anti windup
                                                 0, // small error range, in inches
                                                 0, // small error range timeout, in milliseconds

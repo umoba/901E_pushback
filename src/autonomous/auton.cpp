@@ -3,7 +3,7 @@
 
 #include "globals.h"// IWYU pragma: keep
 #include "pros/misc.h"
-
+#include "globals.h"
 using namespace Robot;
 using namespace Robot::Globals;
 
@@ -41,10 +41,16 @@ void Auton::autonSelection() {
       
       int routeNum = i / 3000;
       selectedAuton(routeNum);
-
+      if (routeNum == 6) {
+        subsystem.intake.skills = true;
+      }
+      else {
+        subsystem.intake.skills = false;
+      }
       pros::lcd::print(5, "Auton Selector Value: %f", autonSelector.get_position());
       pros::lcd::print(6, "Auton Selector Set to: %d", autonRoute);
       pros::lcd::print(7, "Route: %s", routeSpecifics[autonRoute]);
+    
     }
   }
 }

@@ -9,7 +9,7 @@ using namespace Robot::Globals;
 
 
 
-Intake::Intake() : state(0), storage(false) {}
+Intake::Intake() : state(0), storage(false), skills(true) {}
 
 int state = -1;
 void Intake::intake(int state) {
@@ -35,7 +35,7 @@ void Intake::intake(int state) {
     topIntake.move_velocity(-MAX_55_VELOCITY);
     sprocketIntake.move_velocity(-MAX_11_VELOCITY);
     flexIntake.move_velocity(-HALFED_55_VELOCITY);
-    pros::delay(150);
+    pros::delay(170);
     topIntake.move_velocity(-MAX_55_VELOCITY);
     sprocketIntake.move_velocity(MAX_11_VELOCITY);
     flexIntake.move_velocity(MAX_55_VELOCITY);
@@ -45,7 +45,7 @@ void Intake::intake(int state) {
     storage = false;
     topIntake.move_velocity(-MAX_55_VELOCITY);
     sprocketIntake.move_velocity(-MAX_11_VELOCITY);
-    flexIntake.move_velocity(-HALFED_55_VELOCITY);
+    flexIntake.move_velocity(-MAX_55_VELOCITY);
   }
   // skills upper
   else if (state == 4) {
@@ -76,16 +76,31 @@ void Intake::intake(int state) {
     sprocketIntake.move_velocity(-MAX_11_VELOCITY);
   }
 
+  // Skills upper goal with delay
   else if (state == 8) {
-
+        topIntake.move_velocity(-MAX_55_VELOCITY);
+    sprocketIntake.move_velocity(-MAX_11_VELOCITY);
+    flexIntake.move_velocity(-HALFED_55_VELOCITY);
+    pros::delay(250);
+    topIntake.move_velocity(-100);
+    sprocketIntake.move_velocity(MAX_11_VELOCITY);
+    flexIntake.move_velocity(MAX_55_VELOCITY);
   }
 
   else if (state == 9) {
-
+ topIntake.move_velocity(-MAX_55_VELOCITY);
+    sprocketIntake.move_velocity(-MAX_11_VELOCITY);
+    flexIntake.move_velocity(-MAX_55_VELOCITY);
+    pros::delay(300);
+    topIntake.move(-127);
+    sprocketIntake.move_velocity(MAX_11_VELOCITY);
+    flexIntake.move_velocity(MAX_55_VELOCITY);
   }
 
   else if (state == 10) {
-
+    topIntake.move(90);
+    sprocketIntake.move_velocity(-MAX_11_VELOCITY);
+    flexIntake.move_velocity(-MAX_55_VELOCITY);
   }
 
  }
@@ -132,14 +147,26 @@ void Intake::run() {
         flexIntake.move(0); 
       }
       else{
-      topIntake.move_velocity(-MAX_55_VELOCITY);
+        if (skills == true) {
+          topIntake.move_velocity(-MAX_55_VELOCITY);
     sprocketIntake.move_velocity(-MAX_11_VELOCITY);
-    // flexIntake.move_velocity(-HALFED_55_VELOCITY);
-    pros::delay(250);
-    topIntake.move_velocity(-150);
-    sprocketIntake.move_velocity(-MAX_11_VELOCITY);
+    flexIntake.move_velocity(-MAX_55_VELOCITY);
+    pros::delay(300);
+    topIntake.move(-42);
+    sprocketIntake.move_velocity(MAX_11_VELOCITY);
     flexIntake.move_velocity(MAX_55_VELOCITY);
-    flexIntake.move_velocity(HALFED_55_VELOCITY);
+        }
+        else {
+          topIntake.move_velocity(-MAX_55_VELOCITY);
+    sprocketIntake.move_velocity(-MAX_11_VELOCITY);
+    flexIntake.move_velocity(-MAX_55_VELOCITY);
+    pros::delay(300);
+    topIntake.move(-127);
+    sprocketIntake.move_velocity(MAX_11_VELOCITY);
+    flexIntake.move_velocity(MAX_55_VELOCITY);
+        }
+      
+    
       // if (Config::prematches.skillsMode) {
       // // if (true) {
       //   Intake::intake(4);
@@ -158,7 +185,14 @@ void Intake::run() {
       midGoal.retract();
       int intakeState = sprocketIntake.get_direction(); // get current intake direction
       // pros::lcd::print(4, "intake state: %d", intakeState);
-      if (intakeState==1 && storage==false){
+      if (storage == true) {
+      storage = false;
+      topIntake.move(127); // run intake when piston is toggled
+      flexIntake.move(127);
+      sprocketIntake.move(127);
+
+      }
+      else if (intakeState==1 && storage==false){
         topIntake.move(0);
         flexIntake.move(0);
         sprocketIntake.move(0);
@@ -186,9 +220,9 @@ void Intake::run() {
         }
         else {
           storage = false;
-          topIntake.move(-127); // run intake when piston is toggled
+          topIntake.move(-100); // run intake when piston is toggled
           sprocketIntake.move(-127); // run intake when piston is toggled
-          flexIntake.move(-127);
+          flexIntake.move(-90);
         }
       }
   }
@@ -204,7 +238,14 @@ void Intake::run() {
       midGoal.extend();
       int intakeState = sprocketIntake.get_direction(); // get current intake direction
       // pros::lcd::print(4, "intake state: %d", intakeState);
-      if (intakeState==1){
+      if (intakeState== 1 && storage==false){
+        storage = true;
+        sprocketIntake.move(127);
+        flexIntake.move(127);
+        topIntake.move(127);
+
+      }
+      else if (intakeState==1){
         sprocketIntake.move(0);
         flexIntake.move(0);
         topIntake.move(0);

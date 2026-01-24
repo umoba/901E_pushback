@@ -23,9 +23,10 @@ public:
   void color_sort();
   void park();
   int getState();
+  bool skills;
   bool storage;
   Intake();
-
+  
 private:
   int state;
 };

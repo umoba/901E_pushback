@@ -13,13 +13,13 @@ distanceAlgo::distanceAlgo() {}
 // DISTANCE SENSOR OFFSETS
 // Robot frame: +X right, +Z forward
 constexpr double LEFT_DIST_X_IN = 7.5;
-constexpr double LEFT_DIST_Z_IN = 0.0;
+constexpr double LEFT_DIST_Z_IN = 15.0;
 
 constexpr double RIGHT_DIST_X_IN = -7.5;
-constexpr double RIGHT_DIST_Z_IN = 0.0;
+constexpr double RIGHT_DIST_Z_IN = 9.5;
 
 constexpr double BACK_DIST_X_IN = -7.5;
-constexpr double BACK_DIST_Z_IN = -0.5;
+constexpr double BACK_DIST_Z_IN = 13.5;
 
 double distanceAlgo::inchToMM(double inches) {
   return inches * 25.4;
