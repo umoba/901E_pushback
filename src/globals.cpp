@@ -88,15 +88,26 @@ namespace Robot {
 
     // angular PID controller
     lemlib::ControllerSettings angular_controller(9, // proportional gain (kP)
-                                                2, // integral gain (kI)
-                                                65, // derivative gain (kD)
-                                                -2, // anti windup
+                                                3, // integral gain (kI)
+                                                74, // derivative gain (kD)
+                                                -3.5, // anti windup
                                                 0, // small error range, in inches
                                                 0, // small error range timeout, in milliseconds
                                                 0, // large error range, in inches
                                                 0, // large error range timeout, in milliseconds
                                                 0 // maximum acceleration (slew)
     );
+    //     // angular PID controller
+    // lemlib::ControllerSettings angular_controller(9, // proportional gain (kP)
+    //                                             2, // integral gain (kI)
+    //                                             65, // derivative gain (kD)
+    //                                             -2, // anti windup
+    //                                             0, // small error range, in inches
+    //                                             0, // small error range timeout, in milliseconds
+    //                                             0, // large error range, in inches
+    //                                             0, // large error range timeout, in milliseconds
+    //                                             0 // maximum acceleration (slew)
+    // );
 
     // sensors for odometry
     lemlib::OdomSensors sensors(&vertical, // vertical tracking wheel
@@ -107,15 +118,15 @@ namespace Robot {
     );
 
     // input curve for throttle input during driver control
-    lemlib::ExpoDriveCurve throttleCurve(3, // joystick deadband out of 127
-                10, // minimum output where drivetrain will move out of 127
-                1.7 // expo curve gain
+    lemlib::ExpoDriveCurve throttleCurve(5, // joystick deadband out of 127
+                12, // minimum output where drivetrain will move out of 127
+                1.5 // expo curve gain
     );
 
     // input curve for steer input during driver control
-    lemlib::ExpoDriveCurve steerCurve(3, // joystick deadband out of 127
-              3, // minimum output where drivetrain will move out of 127
-              1 // expo curve gain
+    lemlib::ExpoDriveCurve steerCurve(5, // joystick deadband out of 127
+              12, // minimum output where drivetrain will move out of 127
+              1.5 // expo curve gain
     );
 
     // create the chassis

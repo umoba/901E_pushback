@@ -70,9 +70,10 @@ void competition_initialize() {
   // chassis.turnToHeading(180,10000);
 
 void autonomous() {
-  // autonSystem.auton.runSelectedAuton(autonSystem.auton.autonRoute);
-  autonSystem.auton.runSelectedAuton(1);
+  autonSystem.auton.runSelectedAuton(autonSystem.auton.autonRoute);
+  // autonSystem.auton.runSelectedAuton(2);/
   // chassis.setPose(0,0,0);
+  // chassis.turnToHeading(180,10000);
   // chassis.moveToPoint(0,24,10000);
 }
 // 
@@ -80,6 +81,8 @@ void autonomous() {
  * Runs in driver control
  */
 void opcontrol() {
+  chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
+  chassis.cancelAllMotions();
   // subsystem.intake.skills = true;
   if (subsystem.intake.skills == true) {
     wing.extend();
@@ -96,7 +99,7 @@ void opcontrol() {
     
     // Tank Drive
     int dir = master.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
-    int turn = master.get_analog(ANALOG_RIGHT_Y);  // Gets the turn left/right from right joystick
+    int turn = master.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
     // if (dir<= 0) {
     //   leftStick = -dir * dir * 1/127;
     // }
@@ -109,10 +112,13 @@ void opcontrol() {
     // else {
     //   rightStick = turn * turn * 1/127;
     // }
-    leftStick = dir * dir * dir * 1/16129;    // Cubic scaling for finer control
-    rightStick = turn * turn * turn * 1/16129;  // Cubic scaling for finer control
-    left.move(leftStick);                      // Sets left motor voltage
-    right.move(rightStick); 
+
+    // leftStick = dir * dir * dir * 1/16129;    // Cubic scaling for finer control
+    // rightStick = turn * turn * turn * 1/16129;  // Cubic scaling for finer control
+    // left.move(leftStick);                      // Sets left motor voltage
+    // right.move(rightStick); 
+
+    chassis.arcade(dir, turn, false, 0.3);
 
   
   

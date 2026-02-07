@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "nationals",
+    "project_name": "arcade",
     "target": "v5",
     "templates": {
       "LemLib": {

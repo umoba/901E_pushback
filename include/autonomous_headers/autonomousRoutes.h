@@ -13,6 +13,10 @@ namespace Robot {
       void right36();
       void left36();
       void skills();
+      void left34endmid();
+      void bothMid();
+      void rushleft();
+      void rushright();
 
 
       AutonomousRoutes();

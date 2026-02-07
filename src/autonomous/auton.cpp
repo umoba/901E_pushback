@@ -15,11 +15,11 @@ Auton::Auton() : autonRoute(0), routeSpecifics(
   "Left 7 Block",
   "Left 3 + 6",
   "Skills",
-  "---",
-  "---",
-  "---",
-  "---",
-  "Full Skills") 
+  "Both Mid",
+  "Left 3 + 4 End Mid",
+  "rush right",
+  "rush left",
+  "---") 
   
   {}
 
@@ -86,16 +86,19 @@ void Auton::runSelectedAuton(int route) {
       autonSystem.autonomousRoutes.skills();
       break;
     case 7:
-      // Right Mid Goal
+      autonSystem.autonomousRoutes.bothMid();
       break;
     case 8:
       // Left Mid Goal
+      autonSystem.autonomousRoutes.left34endmid();
       break;
     case 9:
-      // Right High Goal
+      // Right rush
+      autonSystem.autonomousRoutes.rushright();
       break;
     case 10:
-      // Left High Goal
+      // Left rush
+      autonSystem.autonomousRoutes.rushleft();
       break;
     case 11:
       // Full Skills
