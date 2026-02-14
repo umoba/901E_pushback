@@ -26,14 +26,16 @@ void initialize() {
   pros::lcd::initialize();
   chassis.calibrate();
   master.clear();
-  pros::delay(200);
+  pros::delay(50);
   master.clear_line(0);
-  pros::delay(200);
+  pros::delay(50);
   master.clear_line(1);
-  pros::delay(200);
+  pros::delay(50);
   master.clear_line(2);
-  pros::delay(200);
+  pros::delay(50);
+
   Config::prematches.allianceIsRed = true;
+
   pros::Task screenTask([&]() {
     while (true) {
       if ( !whileAuton) {
@@ -52,7 +54,7 @@ void initialize() {
       pros::lcd::print(2, "Theta: %f", chassis.getPose().theta);
 
       // master.print(1,0,)
-      master.print(2,0,"Battery: %f", pros::battery::get_capacity());
+      master.print(2,0,"Battery: %4f", pros::battery::get_capacity());
 
 
 
@@ -136,7 +138,7 @@ void opcontrol() {
     // left.move(leftStick);                      // Sets left motor voltage
     // right.move(rightStick); 
 
-    chassis.arcade(dir, turn, false, 0.3);
+    chassis.curvature(dir, turn, false);
 
   
   
