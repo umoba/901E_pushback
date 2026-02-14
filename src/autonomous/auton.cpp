@@ -7,18 +7,18 @@
 using namespace Robot;
 using namespace Robot::Globals;
 
-Auton::Auton() : autonRoute(0), routeSpecifics(
-  "No Auton",
-  "Solo AWP",
-  "Right 3 + 6",
-  "Right 7 Block",
-  "Left 7 Block",
-  "Left 3 + 6",
+Auton::Auton() : locked(false),autonRoute(0), routeSpecifics(
+  "NoAuton",
+  "SoloAWP",
+  "Right3+6",
+  "Right7",
+  "Left7",
+  "Left3+6",
   "Skills",
-  "Both Mid",
-  "Left 3 + 4 End Mid",
-  "rush right",
-  "rush left",
+  "BothMid",
+  "Left3+4End Mid",
+  "rushright",
+  "rushleft",
   "---") 
   
   {}
@@ -52,6 +52,44 @@ void Auton::autonSelection() {
       pros::lcd::print(7, "Route: %s", routeSpecifics[autonRoute]);
     
     }
+  }
+}
+
+void Auton::controllerAutonSelection() {
+  if (!locked) {
+    master.print(0, 0,"#: %d", autonSystem.auton.autonRoute);
+    pros::delay(50);
+    master.print(0, 8, "%s", autonSystem.auton.routeSpecifics[autonSystem.auton.autonRoute]); 
+    pros::delay(50);
+  }
+  if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+    locked = true;
+    master.rumble("-"); //locked
+    master.clear_line(0);
+    pros::delay(50);
+    master.print(0,0,"LOCKED");
+  }
+  else if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+    locked = false;
+    master.clear_line(0);
+    pros::delay(50);
+    master.rumble(".."); //unlocked
+  }
+  if (!locked && master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+    autonSystem.auton.autonRoute++;
+    if (autonSystem.auton.autonRoute > 11) {
+      autonSystem.auton.autonRoute = 0;
+    }
+    master.clear_line(0);
+    pros::delay(50);
+  }
+  else if (!locked && master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+    autonSystem.auton.autonRoute--;
+    if (autonSystem.auton.autonRoute < 0) {
+      autonSystem.auton.autonRoute = 11;
+    }
+    master.clear_line(0);
+    pros::delay(50);
   }
 }
 

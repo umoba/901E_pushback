@@ -13,9 +13,11 @@ public:
     */
   const char* routeSpecifics[12];
   int autonRoute;
+  bool locked;
   void autonSelection();
   void selectedAuton(int route);
   void runSelectedAuton(int route);
+  void controllerAutonSelection();
 
 
   Auton();

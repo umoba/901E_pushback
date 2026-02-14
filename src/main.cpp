@@ -2,6 +2,7 @@
 #include "globals.h"// IWYU pragma: keep
 #include "lemlib/pid.hpp"
 #include "pros/misc.h"
+#include "pros/misc.hpp"
 #include "pros/rtos.hpp"
 #include "subs_headers/intakes.h"
 #include "subs_headers/tongue.h"
@@ -18,10 +19,20 @@ ASSET(ringTest_txt); // '.' replaced with "_" to make c++ happy
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
+std::string str = "";
 bool whileAuton = true;
+bool whileInit = true;
 void initialize() {
   pros::lcd::initialize();
   chassis.calibrate();
+  master.clear();
+  pros::delay(200);
+  master.clear_line(0);
+  pros::delay(200);
+  master.clear_line(1);
+  pros::delay(200);
+  master.clear_line(2);
+  pros::delay(200);
   Config::prematches.allianceIsRed = true;
   pros::Task screenTask([&]() {
     while (true) {
@@ -29,15 +40,20 @@ void initialize() {
       subsystem.intake.stopTOP();
       }
       // subsystem.intake.color_sort();
-      autonSystem.auton.autonSelection();
-        
+      // autonSystem.auton.autonSelection();
+      
+      // if (whileInit) {
+        autonSystem.auton.controllerAutonSelection();
+      // }
+      // autonSystem.auton.controllerAutonSelection();
       // print robot location to the brain screen
       pros::lcd::print(0, "X: %f", chassis.getPose().x);
       pros::lcd::print(1, "Y: %f", chassis.getPose().y);
       pros::lcd::print(2, "Theta: %f", chassis.getPose().theta);
-      
 
-      // lines 1-3 reserved for auton selection
+      // master.print(1,0,)
+      master.print(2,0,"Battery: %f", pros::battery::get_capacity());
+
 
 
 
@@ -70,8 +86,9 @@ void competition_initialize() {
   // chassis.turnToHeading(180,10000);
 
 void autonomous() {
+
   autonSystem.auton.runSelectedAuton(autonSystem.auton.autonRoute);
-  // autonSystem.auton.runSelectedAuton(2);/
+  // autonSystem.auton.runSelectedAuton(2);
   // chassis.setPose(0,0,0);
   // chassis.turnToHeading(180,10000);
   // chassis.moveToPoint(0,24,10000);
@@ -81,6 +98,7 @@ void autonomous() {
  * Runs in driver control
  */
 void opcontrol() {
+  whileInit = false;
   chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
   chassis.cancelAllMotions();
   // subsystem.intake.skills = true;
